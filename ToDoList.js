@@ -1,30 +1,34 @@
-// Inside ToDoList.js
 import React from 'react';
-import { ScrollView, Pressable, View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-const ToDoList = ({ tasks }) => {
-    return (
-        <ScrollView>
-            {tasks.map((task, index) => (
-                <Pressable key={index}>
-                    <View style={styles.task}>
-                        <Text style={styles.taskText}>{task}</Text>
-                    </View>
-                </Pressable>
-            ))}
-        </ScrollView> 
-    );
-};
+function ToDoList({ tasks, removeTask }) {
+  return (
+    <View style={styles.container}>
+      {tasks.map((task) => (
+        <View key={task} style={styles.task}>
+          <Text style={styles.taskText}>{task}</Text>
+          <Button title="Remove" onPress={() => removeTask(task)} />
+        </View>
+      ))}
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
-    task: {
-        padding: 10,
-        borderBottomWidth: 1,
-        borderColor: '#ccc',
-    },
-    taskText: {
-        fontSize: 16,
-    },
+  container: {
+    marginTop: 20,
+  },
+  task: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  taskText: {
+    fontSize: 16,
+  },
 });
 
 export default ToDoList;
